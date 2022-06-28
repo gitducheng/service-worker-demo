@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>service worker cache demo</h1>
+
+<div>
+    <button id="request">get user info</button>
+    <button id="del">delete cache /api/user</button>
+    <pre id="pre"></pre>
+</div>
+
+<script>
+  const request = document.getElementById('request')
+  const pre = document.getElementById('pre')
+  const del = document.getElementById('del')
+  window.onload = function () {
+    navigator.serviceWorker.register('/sw.js')
+  }
+
+  del.addEventListener('click',() => {
+    window.navigator.serviceWorker.getRegistration().then(registration => {
+      registration.active.postMessage('delete cache')
+    })
+  })
+
+  request.addEventListener('click', () => {
+    axios.get('/api/user').then(response => {
+      pre.innerHTML = JSON.stringify(response.data)
+    })
+  })
+</script>
+</body>
+</html>

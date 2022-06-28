@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>service worker registration demo</h1>
+
+<div>
+    <button id="register">register service worker</button>
+</div>
+<script>
+  const register = document.getElementById('register')
+
+  register.addEventListener('click', () => {
+    navigator.serviceWorker.register('/sw.js')
+  });
+</script>
+</body>
+</html>
